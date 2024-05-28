@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login with MetaMask</title>
-        <link rel="stylesheet" href="../CSS/styles.css">
-    </head>
-    <body>
-        <button id="loginButton">
-            <img src="../SVG Files/metamask.svg" alt="MetaMask Icon" style="width:20px;height:20px;">
-            Login with MetaMask
-        </button>
-        <div id="displayId" style="margin-top: 20px;"></div>
-        <div id="balance" style="margin-top: 20px;"></div>
-        <input type="text" id="itemName" placeholder="Enter item name">
-        <input type="number" id="starRating" min="1" max="5" placeholder="Enter star rating (1-5)">
-        <input type="text" id="reviewComment" placeholder="Enter review comment">
-        <button id="transactionButton" style="margin-top: 20px;">Create Transaction</button>
-        <input type="text" id="ItemNameSearch" style="margin-top: 20px;" placeholder="Enter item name">
-        <input type="text" id="DomainSearch" placeholder="Enter domain">
-        <button id="searchButton" style="margin-top: 20px;">Search</button>
-        <script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
-        <script type="module" src="../JS/login.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Integration</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <button id="loginButton">Login</button>
+        <button id="transactionButton">Transaction</button>
+        <button id="searchButton">Search</button>
+    </div>
+    <div class="content">
+        <!-- Login Section -->
+        <div id="loginSection" class="section hidden">
+            <div id="displayId"></div>
+            <div id="balance"></div>
+        </div>
+        <!-- Transaction Section -->
+        <div id="transactionSection" class="section hidden">
+            <div class="star-rating">
+                <span class="star" data-value="1">&#9734;</span>
+                <span class="star" data-value="2">&#9734;</span>
+                <span class="star" data-value="3">&#9734;</span>
+                <span class="star" data-value="4">&#9734;</span>
+                <span class="star" data-value="5">&#9734;</span>
+                <span id="ratingValue">0/5</span>
+            </div>
+            <div>
+                <input type="text" id="itemName" placeholder="Item name">
+            </div>
+            <div>
+                <textarea id="reviewComment" placeholder="Comment"></textarea>
+            </div>
+            <button id="submitTransactionButton">Submit Review</button>
+        </div>
+        <!-- Search Section -->
+        <div id="searchSection" class="section hidden">
+            <input type="text" id="ItemNameSearch" placeholder="Enter item name">
+            <input type="text" id="DomainSearch" placeholder="Enter domain">
+            <button id="performSearchButton">Search</button>
+            <div id="searchResults"></div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
+<script type="module" src="../JS/login.js"></script>
+</body>
 </html>
