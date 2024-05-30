@@ -7,48 +7,63 @@
     <link rel="stylesheet" href="../CSS/styles.css">
 </head>
 <body>
-<div class="container">
-    <div class="sidebar">
-        <button id="loginButton">Login</button>
-        <button id="transactionButton">Transaction</button>
-        <button id="searchButton">Search</button>
+    <div class="container">
+        <div class="sidebar">
+            <button id="loginButton">Login</button>
+            <button id="transactionButton">Transaction</button>
+            <button id="searchButton">Search</button>
+            <button id="itemInfoButton">Item Info</button>
+        </div>
+        <div class="content">
+            <!-- Login Section -->
+            <div id="loginSection" class="section hidden">
+                <div id="displayId"></div>
+                <div id="balance"></div>
+            </div>
+            <!-- Transaction Section -->
+            <div id="transactionSection" class="section hidden">
+                <div class="star-rating">
+                    <span class="star" data-value="1">&#9734;</span>
+                    <span class="star" data-value="2">&#9734;</span>
+                    <span class="star" data-value="3">&#9734;</span>
+                    <span class="star" data-value="4">&#9734;</span>
+                    <span class="star" data-value="5">&#9734;</span>
+                    <span id="ratingValue">0/5</span>
+                </div>
+                <div>
+                    <input type="text" id="itemName" placeholder="Item name">
+                </div>
+                <div>
+                    <textarea id="reviewComment" placeholder="Comment"></textarea>
+                </div>
+                <button id="submitTransactionButton">Submit Review</button>
+            </div>
+            <!-- Search Section -->
+            <div id="searchSection" class="section hidden">
+                <input type="text" id="ItemNameSearch" placeholder="Enter item name">
+                <button id="performSearchButton">Search Item</button>
+                <input type="text" id="DomainNameSearch" placeholder="Enter domain name">
+                <button id="performDomainSearchButton">Search Domain</button>
+                <input type="text" id="UserAddressSearch" placeholder="Enter user address">
+                <button id="performUserSearchButton">Search User Reviews</button>
+                <input type="text" id="ItemNameInDomainSearch" placeholder="Enter item name in domain">
+                <input type="text" id="DomainNameForItemSearch" placeholder="Enter domain name for item">
+                <button id="performItemInDomainSearchButton">Search Item in Domain</button>
+                <div id="searchResults"></div>
+            </div>
+            <!-- Item Info Section -->
+            <div id="itemInfoSection" class="section hidden">
+                <input type="text" id="ItemNameInfoSearch" placeholder="Enter item name">
+                <button id="performItemInfoSearchButton">Search Item Info</button>
+                <div id="itemInfoResults"></div>
+            </div>
+        </div>
     </div>
-    <div class="content">
-        <!-- Login Section -->
-        <div id="loginSection" class="section hidden">
-            <div id="displayId"></div>
-            <div id="balance"></div>
-        </div>
-        <!-- Transaction Section -->
-        <div id="transactionSection" class="section hidden">
-            <div class="star-rating">
-                <span class="star" data-value="1">&#9734;</span>
-                <span class="star" data-value="2">&#9734;</span>
-                <span class="star" data-value="3">&#9734;</span>
-                <span class="star" data-value="4">&#9734;</span>
-                <span class="star" data-value="5">&#9734;</span>
-                <span id="ratingValue">0/5</span>
-            </div>
-            <div>
-                <input type="text" id="itemName" placeholder="Item name">
-            </div>
-            <div>
-                <textarea id="reviewComment" placeholder="Comment"></textarea>
-            </div>
-            <button id="submitTransactionButton">Submit Review</button>
-        </div>
-        <!-- Search Section -->
-        <div id="searchSection" class="section hidden">
-            <input type="text" id="ItemNameSearch" placeholder="Enter item name">
-            <button id="performSearchButton">Search</button>
-            <div id="searchResults"></div>
-        </div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
-<script src="../JS/login.js"></script>
-<script src="../JS/showSection.js"></script>
-<script src="../JS/transaction.js"></script>
-<script src="../JS/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
+    <script src="../JS/login.js"></script>
+    <script src="../JS/showSection.js"></script>
+    <script src="../JS/transaction.js"></script>
+    <script src="../JS/search.js"></script>
+    <script src="../JS/itemInfo.js"></script>
 </body>
 </html>
