@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const starRating = ratingValue.textContent.split('/')[0];
         const reviewComment = document.getElementById('reviewComment').value;
 
-        if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+        if (typeof window.ethereum !== 'undefined' || typeof window.web3 !== 'undefined') {
             try {
                 if (!window.ethereum.isConnected()) {
                     await window.ethereum.enable();
