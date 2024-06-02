@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const loginButton = document.getElementById('loginButton');
-    const loginSection = document.getElementById('loginSection');
+    const container = document.getElementById('myAppContainer');
+    const loginButton = container.querySelector('#loginButton');
+    const loginSection = container.querySelector('#loginSection');
 
     loginButton.addEventListener('click', () => {
         showSection('loginSection');
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function loginWithMetaMask() {
-        if (typeof window.ethereum !== 'undefined' || typeof window.web3 !== 'undefined') {
+        if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
             try {
                 if (!window.ethereum.isConnected()) {
                     await window.ethereum.enable();
@@ -39,14 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     function showAccountId(accountId) {
-        const displayDiv = document.getElementById('displayId');
+        const displayDiv = container.querySelector('#displayId');
         displayDiv.innerHTML = `Logged in with ID: ${accountId}`;
     }
 
     function showAccountBalance(balance) {
-        const balanceDiv = document.getElementById('balance');
+        const balanceDiv = container.querySelector('#balance');
         balanceDiv.innerHTML = `Balance: ${window.ethers.utils.formatEther(balance)} ETH`;
     }
 });

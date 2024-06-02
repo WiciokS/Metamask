@@ -1,17 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const itemInfoButton = document.getElementById('itemInfoButton');
-    const performItemInfoSearchButton = document.getElementById('performItemInfoSearchButton');
-    const itemInfoSection = document.getElementById('itemInfoSection');
+    const container = document.getElementById('myAppContainer');
+    const itemInfoButton = container.querySelector('#itemInfoButton');
 
     itemInfoButton.addEventListener('click', () => {
         showSection('itemInfoSection');
     });
 
-    performItemInfoSearchButton.addEventListener('click', itemInfoSearch);
-
     async function itemInfoSearch() {
         clearItemInfoResults();
-        const itemName = document.getElementById('ItemNameInfoSearch').value;
+        const itemName = container.querySelector('#ItemNameInfoSearch').value;
+        console.log('Item Name:', itemName);
 
         try {
             const response = await fetch(`http://84.55.60.45:443/items/${itemName}/info`);
@@ -31,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearItemInfoResults() {
-        const itemInfoResults = document.getElementById('itemInfoResults');
+        const itemInfoResults = container.querySelector('#itemInfoResults');
         itemInfoResults.innerHTML = '';
     }
 
     function displayItemInfo(itemInfo) {
-        const itemInfoResults = document.getElementById('itemInfoResults');
+        const itemInfoResults = container.querySelector('#itemInfoResults');
         const imagesHtml = itemInfo.Images.map(image => `<img src="${image}" alt="${itemInfo['Item Name']}" style="max-width: 100%; height: auto; display: block; margin-bottom: 10px;" />`).join('');
         itemInfoResults.innerHTML = `
             <h2>Item Name: ${itemInfo['Item Name']}</h2>
@@ -45,4 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <div>${imagesHtml}</div>
         `;
     }
+
+    container.querySelector('#performItemInfoSearchButton').addEventListener('click', itemInfoSearch);
 });

@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const transactionButton = document.getElementById('transactionButton');
-    const submitTransactionButton = document.getElementById('submitTransactionButton');
-    const stars = document.querySelectorAll('.star');
-    const ratingValue = document.getElementById('ratingValue');
+    const container = document.getElementById('myAppContainer');
+    const transactionButton = container.querySelector('#transactionButton');
+    const submitTransactionButton = container.querySelector('#submitTransactionButton');
+    const stars = container.querySelectorAll('.star');
+    const ratingValue = container.querySelector('#ratingValue');
 
     transactionButton.addEventListener('click', () => {
         showSection('transactionSection');
@@ -23,11 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function createTransaction() {
-        const itemName = document.getElementById('itemName').value;
+        const itemName = container.querySelector('#itemName').value;
         const starRating = ratingValue.textContent.split('/')[0];
-        const reviewComment = document.getElementById('reviewComment').value;
+        const reviewComment = container.querySelector('#reviewComment').value;
 
-        if (typeof window.ethereum !== 'undefined' || typeof window.web3 !== 'undefined') {
+        if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
             try {
                 if (!window.ethereum.isConnected()) {
                     await window.ethereum.enable();

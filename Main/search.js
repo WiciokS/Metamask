@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.getElementById('searchButton');
+    const container = document.getElementById('myAppContainer');
+    const searchButton = container.querySelector('#searchButton');
     const searchOptions = [
-        { id: 'performSearchButton', label: 'Search Item', handler: itemSearch },
-        { id: 'performDomainSearchButton', label: 'Search Domain', handler: domainSearch },
-        { id: 'performUserSearchButton', label: 'Search User Reviews', handler: userSearch },
-        { id: 'performItemInDomainSearchButton', label: 'Search Item in Domain', handler: itemInDomainSearch }
+        { id: 'performSearchButton', label: 'Item', handler: itemSearch },
+        { id: 'performDomainSearchButton', label: 'Domain', handler: domainSearch },
+        { id: 'performUserSearchButton', label: 'User Reviews', handler: userSearch },
+        { id: 'performItemInDomainSearchButton', label: 'Item in Domain', handler: itemInDomainSearch }
     ];
 
     searchButton.addEventListener('click', () => {
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function loadSearchOptions() {
-        const dynamicSection = document.getElementById('dynamicSection');
+        const dynamicSection = container.querySelector('#dynamicSection');
         dynamicSection.innerHTML = `
             <div class="search-options">
                 ${searchOptions.map(option => `<button id="${option.id}">${option.label}</button>`).join('')}
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         searchOptions.forEach(option => {
-            document.getElementById(option.id).addEventListener('click', () => {
+            container.querySelector(`#${option.id}`).addEventListener('click', () => {
                 clearSearchContent();
                 option.handler();
             });
@@ -31,21 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearSearchContent() {
-        const searchContent = document.getElementById('searchContent');
+        const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = '';
-        const searchResults = document.getElementById('searchResults');
+        const searchResults = container.querySelector('#searchResults');
         searchResults.innerHTML = '';
     }
 
     async function itemSearch() {
-        const searchContent = document.getElementById('searchContent');
+        const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
             <input type="text" id="ItemNameSearch" placeholder="Enter item name">
             <button id="performItemSearch">Search Item</button>
         `;
-        document.getElementById('performItemSearch').addEventListener('click', async () => {
+        container.querySelector('#performItemSearch').addEventListener('click', async () => {
             clearResults();
-            const itemName = document.getElementById('ItemNameSearch').value;
+            const itemName = container.querySelector('#ItemNameSearch').value;
             console.log('Item Name:', itemName);
 
             try {
@@ -53,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const itemData = await itemResponse.json();
 
                 if (itemData.success) {
-                    const item = itemData.message;
-                    console.log('Item Data:', item);
+                    const items = itemData.message;
+                    console.log('Item Data:', items);
 
-                    displayItemData(item);
+                    displayItemData(items);
 
                     const reviewsResponse = await fetch(`http://84.55.60.45:443/reviews/${itemName}`);
                     const reviewsData = await reviewsResponse.json();
@@ -79,14 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function domainSearch() {
-        const searchContent = document.getElementById('searchContent');
+        const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
             <input type="text" id="DomainNameSearch" placeholder="Enter domain name">
             <button id="performDomainSearch">Search Domain</button>
         `;
-        document.getElementById('performDomainSearch').addEventListener('click', async () => {
+        container.querySelector('#performDomainSearch').addEventListener('click', async () => {
             clearResults();
-            const domainName = document.getElementById('DomainNameSearch').value;
+            const domainName = container.querySelector('#DomainNameSearch').value;
             console.log('Domain Name:', domainName);
 
             try {
@@ -94,10 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const domainData = await domainResponse.json();
 
                 if (domainData.success) {
-                    const domain = domainData.message;
-                    console.log('Domain Data:', domain);
+                    const domains = domainData.message;
+                    console.log('Domain Data:', domains);
 
-                    displayDomainData(domain);
+                    displayDomainData(domains);
 
                     let reviewsResponse;
                     if (domainName === "") {
@@ -105,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         reviewsResponse = await fetch(`http://84.55.60.45:443/reviews/domains/${domainName}`);
                     }
-
                     const reviewsData = await reviewsResponse.json();
 
                     if (reviewsData.success) {
@@ -126,14 +126,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function userSearch() {
-        const searchContent = document.getElementById('searchContent');
+        const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
             <input type="text" id="UserAddressSearch" placeholder="Enter user address">
             <button id="performUserSearch">Search User Reviews</button>
         `;
-        document.getElementById('performUserSearch').addEventListener('click', async () => {
+        container.querySelector('#performUserSearch').addEventListener('click', async () => {
             clearResults();
-            const userAddress = document.getElementById('UserAddressSearch').value;
+            const userAddress = container.querySelector('#UserAddressSearch').value;
             console.log('User Address:', userAddress);
 
             try {
@@ -155,16 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function itemInDomainSearch() {
-        const searchContent = document.getElementById('searchContent');
+        const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
             <input type="text" id="ItemNameInDomainSearch" placeholder="Enter item name in domain">
             <input type="text" id="DomainNameForItemSearch" placeholder="Enter domain name for item">
             <button id="performItemInDomainSearch">Search Item in Domain</button>
         `;
-        document.getElementById('performItemInDomainSearch').addEventListener('click', async () => {
+        container.querySelector('#performItemInDomainSearch').addEventListener('click', async () => {
             clearResults();
-            const itemName = document.getElementById('ItemNameInDomainSearch').value;
-            const domainName = document.getElementById('DomainNameForItemSearch').value;
+            const itemName = container.querySelector('#ItemNameInDomainSearch').value;
+            const domainName = container.querySelector('#DomainNameForItemSearch').value;
             console.log('Item Name:', itemName);
             console.log('Domain Name:', domainName);
 
@@ -187,12 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearResults() {
-        const searchResults = document.getElementById('searchResults');
+        const searchResults = container.querySelector('#searchResults');
         searchResults.innerHTML = '';
     }
 
     function displayItemData(items) {
-        const searchResults = document.getElementById('searchResults');
+        const searchResults = container.querySelector('#searchResults');
         if (Array.isArray(items)) {
             const itemsHtml = items.map(item => `
                 <div class="item">
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayDomainData(domains) {
-        const searchResults = document.getElementById('searchResults');
+        const searchResults = container.querySelector('#searchResults');
         if (Array.isArray(domains)) {
             const domainsHtml = domains.map(domain => `
                 <div class="domain">
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayReviews(reviews) {
-        const searchResults = document.getElementById('searchResults');
+        const searchResults = container.querySelector('#searchResults');
         const reviewsHtml = reviews.map(review => `
             <div class="review">
                 <p><strong>Reviewer:</strong> ${review.reviewer}</p>

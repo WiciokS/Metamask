@@ -1,29 +1,31 @@
-body {
+#myAppContainer {
     font-family: Arial, sans-serif;
     display: flex;
+    flex-direction: column;
     height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
 }
 
-.container {
+#myAppContainer .container {
     display: flex;
+    flex: 1;
     width: 100%;
-    height: 100vh;
 }
 
-.sidebar {
+#myAppContainer .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 20%;
     background-color: #333;
     color: white;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    overflow-y: auto;
 }
 
-.sidebar button {
+#myAppContainer .sidebar button {
     width: 100%;
     margin-bottom: 20px;
     padding: 15px;
@@ -35,55 +37,60 @@ body {
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s ease;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
-.sidebar button:hover {
+#myAppContainer .sidebar button:hover {
     background-color: #555;
 }
 
-.content {
-    width: 80%;
-    padding: 40px 60px;
+#myAppContainer .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
     overflow-y: auto;
 }
 
-.section {
+#myAppContainer .section {
     display: none;
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0,.1);
+    margin-bottom: 20px;
 }
 
-.section.active {
+#myAppContainer .section.active {
     display: block;
 }
 
-.star-rating {
+#myAppContainer .star-rating {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.star {
+#myAppContainer .star {
     font-size: 40px;
     cursor: pointer;
     color: grey;
     transition: color 0.3s ease;
 }
 
-.star:hover,
-.star.selected {
+#myAppContainer .star:hover,
+#myAppContainer .star.selected {
     color: gold;
 }
 
-#ratingValue {
+#myAppContainer #ratingValue {
     font-size: 24px;
     margin-left: 10px;
 }
 
-input[type="text"],
-textarea {
+#myAppContainer input[type="text"],
+#myAppContainer textarea {
     width: 100%;
     padding: 10px 15px;
     margin-top: 10px;
@@ -93,11 +100,11 @@ textarea {
     box-sizing: border-box;
 }
 
-textarea {
+#myAppContainer textarea {
     height: 100px;
 }
 
-button {
+#myAppContainer button {
     background-color: #ff7a59;
     background-image: linear-gradient(45deg, #f06292, #f76b1c);
     color: white;
@@ -109,15 +116,15 @@ button {
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-button:hover {
+#myAppContainer button:hover {
     background-image: linear-gradient(45deg, #f76b1c, #f06292);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-.reviews-container {
+#myAppContainer .reviews-container {
     max-height: 400px;
     overflow-y: auto;
     border: 1px solid #ccc;
@@ -126,16 +133,16 @@ button:hover {
     margin-top: 20px;
 }
 
-.review {
+#myAppContainer .review {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
 }
 
-.review:last-child {
+#myAppContainer .review:last-child {
     border-bottom: none;
 }
 
-.search-options button {
+#myAppContainer .search-options button {
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 10px 20px;
@@ -146,6 +153,49 @@ button:hover {
     cursor: pointer;
 }
 
-.search-options button:hover {
+#myAppContainer .search-options button:hover {
     background: linear-gradient(90deg, #ee0979, #ff6a00);
+}
+
+/* Specific Styles for the Display Box */
+#displayId, #balance {
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+#itemInfoResults img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+#myAppContainer .items-container,
+#myAppContainer .domains-container,
+#myAppContainer .reviews-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#myAppContainer .item,
+#myAppContainer .domain,
+#myAppContainer .review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+#myAppContainer .item:last-child,
+#myAppContainer .domain:last-child,
+#myAppContainer .review:last-child {
+    border-bottom: none;
 }
