@@ -13,10 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         clearItemInfoResults();
         const itemName = document.getElementById('ItemNameInfoSearch').value;
 
-        const queryParams = new URLSearchParams({
-            itemName: itemName
-        }).toString();
-
         try {
             const response = await fetch(`http://84.55.60.45:443/items/${itemName}/info`);
             const data = await response.json();
