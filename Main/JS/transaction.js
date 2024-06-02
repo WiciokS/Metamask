@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const transactionButton = document.getElementById('transactionButton');
     const submitTransactionButton = document.getElementById('submitTransactionButton');
-    const transactionSection = document.getElementById('transactionSection');
     const stars = document.querySelectorAll('.star');
     const ratingValue = document.getElementById('ratingValue');
 
@@ -23,64 +22,73 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    submitTransactionButton.addEventListener('click', createTransaction);
-
     async function createTransaction() {
         const itemName = document.getElementById('itemName').value;
         const starRating = ratingValue.textContent.split('/')[0];
         const reviewComment = document.getElementById('reviewComment').value;
 
-        if (!window.ethereum) {
-            console.error('MetaMask is not installed!');
-            alert('Please install MetaMask!');
-            return;
-        }
+        if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+            try {
+                if (!window.ethereum.isConnected()) {
+                    await window.ethereum.enable();
+                }
 
-        try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const account = accounts[0];
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
+                console.log(starRating, reviewComment, itemName, account);
 
-            // Construct the URL with query parameters
-            const url = `http://84.55.60.45:443/reviews/${itemName}/add?initiator=${account}`;
+                // Prepare query parameters
+                const queryParams = new URLSearchParams({
+                    initiator: account
+                }).toString();
 
-            // Construct the body data
-            const bodyData = {
-                comment: reviewComment,
-                rating: starRating.toString()
-            };
+                // Prepare the body of the request
+                const bodyData = JSON.stringify({
+                    comment: reviewComment,
+                    rating: starRating
+                });
 
-            // Send review data to the server
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(bodyData)
-            });
+                // Send review data to the server
+                const response = await fetch(`http://84.55.60.45:443/reviews/${itemName}/add?${queryParams}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: bodyData
+                });
 
-            const responseData = await response.json();
-            console.log(responseData);
-            let txData;
-            if(responseData.success) {
-                txData = responseData.message;
-            } else {
-                alert('Error sending transaction to the server.');
-                return;
+                // Get the transaction data from the server response
+                const responseData = await response.json();
+                console.log(responseData);
+                let txData;
+                if(responseData.success) {
+                    txData = responseData.message;
+                } else {
+                    alert('Error sending transaction to the server.');
+                    return;
+                }
+
+                const ethersProvider = new ethers.providers.Web3Provider(window.ethereum);
+
+                // Request MetaMask to handle the transaction
+                const txHash = await window.ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [txData]
+                });
+
+                // Wait for the transaction to be mined
+                const transactionReceipt = await ethersProvider.waitForTransaction(txHash);
+
+                alert('Transaction has been sent to the server.');
+
+            } catch (error) {
+                console.error("Error creating or signing the transaction:", error);
             }
-
-            const ethersProvider = new ethers.providers.Web3Provider(window.ethereum);
-
-            const txHash = await window.ethereum.request({
-                method: 'eth_sendTransaction',
-                params: [txData]
-            });
-
-            const transactionReceipt = await ethersProvider.waitForTransaction(txHash);
-
-            alert('Transaction has been sent to the server.');
-
-        } catch (error) {
-            console.error("Error creating or signing the transaction:", error);
+        } else {
+            console.error('MetaMask is not installed!');
+            alert('MetaMask is not installed. Please install MetaMask from https://metamask.io/');
         }
     }
+
+    submitTransactionButton.addEventListener('click', createTransaction);
 });

@@ -8,32 +8,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function loginWithMetaMask() {
-        if (!window.ethereum) {
+        if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
+            try {
+                if (!window.ethereum.isConnected()) {
+                    await window.ethereum.enable();
+                }
+
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const ethersProvider = new window.ethers.providers.Web3Provider(window.ethereum);
+                const signer = ethersProvider.getSigner();
+                const account = await signer.getAddress();
+                showAccountId(account);
+
+                const balance = await ethersProvider.getBalance(account);
+                showAccountBalance(balance);
+
+                fetch('http://84.55.60.45:443/ping')
+                    .then(response => response.text())
+                    .then(data => console.log(data))
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            } catch (error) {
+                console.error("Error accessing the Ethereum account:", error);
+                alert("Error accessing the Ethereum account. Please ensure MetaMask is configured correctly.");
+            }
+        } else {
             console.error('MetaMask is not installed!');
-            alert('Please install MetaMask!');
-            return;
-        }
-
-        try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const ethersProvider = new window.ethers.providers.Web3Provider(window.ethereum);
-            const signer = ethersProvider.getSigner();
-            const account = await signer.getAddress();
-            showAccountId(account);
-
-            const balance = await ethersProvider.getBalance(account);
-            showAccountBalance(balance);
-
-            fetch('http://84.55.60.45:443/ping')
-                .then(response => response.text())
-                .then(data => console.log(data))
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-        } catch (error) {
-            console.error("Error accessing the Ethereum account:", error);
+            alert('MetaMask is not installed. Please install MetaMask from https://metamask.io/');
         }
     }
+
 
     function showAccountId(accountId) {
         const displayDiv = document.getElementById('displayId');
