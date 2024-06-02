@@ -40,18 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
 
-            const queryParams = new URLSearchParams({
-                address: account,
-                itemName: itemName,
-                comment: reviewComment,
-                rating: starRating
-            }).toString();
+            // Construct the URL with query parameters
+            const url = `http://84.55.60.45:443/reviews/${itemName}/add?initiator=${account}`;
 
-            const response = await fetch(`http://84.55.60.45:443/addReview?${queryParams}`, {
+            // Construct the body data
+            const bodyData = {
+                comment: reviewComment,
+                rating: starRating.toString()
+            };
+
+            // Send review data to the server
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                body: JSON.stringify(bodyData)
             });
 
             const responseData = await response.json();

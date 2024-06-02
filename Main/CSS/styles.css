@@ -134,3 +134,18 @@ button:hover {
 .review:last-child {
     border-bottom: none;
 }
+
+.search-options button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #ff6a00, #ee0979);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-options button:hover {
+    background: linear-gradient(90deg, #ee0979, #ff6a00);
+}

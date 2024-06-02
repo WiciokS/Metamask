@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).toString();
 
         try {
-            const response = await fetch(`http://84.55.60.45:443/itemInfo?${queryParams}`);
+            const response = await fetch(`http://84.55.60.45:443/items/${itemName}/info`);
             const data = await response.json();
 
             if (data.success) {
