@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         showSection('itemInfoSection');
     });
 
-    async function itemInfoSearch() {
+    async function itemInfoSearch(check) {
         clearItemInfoResults();
         const itemName = container.querySelector('#ItemNameInfoSearch').value;
         console.log('Item Name:', itemName);
 
         try {
-            const response = await fetch(`http://84.55.60.45:443/items/${itemName}/info`);
+            const response = await fetch(`http://84.55.60.45:443/items/${itemName}/info?useMapping=${check}`);
             const data = await response.json();
 
             if (data.success) {
@@ -44,5 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    container.querySelector('#performItemInfoSearchButton').addEventListener('click', itemInfoSearch);
+    container.querySelector('#performItemInfoSearchButton').addEventListener('click', () => itemInfoSearch(true));
+    container.querySelector('#performItemInfoSearchButton2').addEventListener('click', () => itemInfoSearch(false));
 });

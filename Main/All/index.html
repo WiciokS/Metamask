@@ -11,17 +11,24 @@
     <div class="container">
         <div class="sidebar">
             <button id="loginButton">Login</button>
-            <button id="transactionButton">Transaction</button>
+            <button id="transactionButton">Review</button>
+            <button id="reviewButton">Review manual name</button>
             <button id="searchButton">Search</button>
             <button id="itemInfoButton">Item Info</button>
+            <button id="registerItemButton">Register Item</button>
         </div>
         <div class="content">
             <!-- Login Section -->
             <div id="loginSection" class="section hidden">
-                <div id="displayId"></div>
-                <div id="balance"></div>
+                <button id="metaMaskLoginButton">Login to MetaMask</button>
             </div>
-            <!-- Transaction Section -->
+            <!-- Register Item Section -->
+            <div id="registerItemSection" class="section hidden">
+                <label for="itemNameRegister"></label><input type="text" id="itemNameRegister" placeholder="Item name">
+                <button id="registerItem">Register Item</button>
+                <button id="checkItemRegistration">Check Item Registration</button>
+            </div>
+            <!-- Review Section -->
             <div id="transactionSection" class="section hidden">
                 <div class="star-rating">
                     <span class="star" data-value="1">&#9734;</span>
@@ -39,12 +46,14 @@
                 </div>
                 <button id="submitTransactionButton">Submit Review</button>
             </div>
+
             <!-- Search Section -->
             <div id="dynamicSection" class="section hidden"></div>
             <!-- Item Info Section -->
             <div id="itemInfoSection" class="section hidden">
                 <label for="ItemNameInfoSearch"></label><input type="text" id="ItemNameInfoSearch" placeholder="Enter item name">
-                <button id="performItemInfoSearchButton">Search Item Info</button>
+                <button id="performItemInfoSearchButton">Search by registered name</button>
+                <button id="performItemInfoSearchButton2">Search by item name</button>
                 <div id="itemInfoResults"></div>
             </div>
         </div>
@@ -53,8 +62,9 @@
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
 <script src="login.js"></script>
 <script src="showSection.js"></script>
-<script src="transaction.js"></script>
+<script src="review.js"></script>
 <script src="search.js"></script>
 <script src="itemInfo.js"></script>
+<script src="registerItem.js"></script>
 </body>
 </html>

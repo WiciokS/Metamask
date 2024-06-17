@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Integration Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="myAppContainer">
+    <div class="container">
+        <div class="content">
+            <!-- Review Section -->
+            <div id="transactionSection">
+                <div id="myVariable" data-value="Probably Last Test"></div>
+                <div class="star-rating">
+                    <span class="star" data-value="1">&#9734;</span>
+                    <span class="star" data-value="2">&#9734;</span>
+                    <span class="star" data-value="3">&#9734;</span>
+                    <span class="star" data-value="4">&#9734;</span>
+                    <span class="star" data-value="5">&#9734;</span>
+                    <span id="ratingValue">0/5</span>
+                </div>
+                <div>
+                    <label for="reviewComment"></label><textarea id="reviewComment" placeholder="Comment"></textarea>
+                </div>
+                <button id="submitTransactionButton">Submit Review</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
+<script src="reviewManualSingle.js"></script>
+</body>
+</html>

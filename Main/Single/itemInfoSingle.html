@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Integration Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="myAppContainer">
+    <div class="container">
+        <div class="content">
+            <!-- Item Info Section -->
+            <div id="itemInfoSection">
+                <label for="ItemNameInfoSearch"></label><input type="text" id="ItemNameInfoSearch" placeholder="Enter item name">
+                <button id="performItemInfoSearchButton">Search by registered name</button>
+                <button id="performItemInfoSearchButton2">Search by item name</button>
+                <div id="itemInfoResults"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
+<script src="itemInfoSingle.js"></script>
+</body>
+</html>
