@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('myAppContainer');
 
+    // Function to search for item information
     async function itemInfoSearch(check) {
         clearItemInfoResults();
         const itemName = container.querySelector('#ItemNameInfoSearch').value;
@@ -23,11 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Function to clear item info results
     function clearItemInfoResults() {
         const itemInfoResults = container.querySelector('#itemInfoResults');
         itemInfoResults.innerHTML = '';
     }
 
+    // Function to display item info
     function displayItemInfo(itemInfo) {
         const itemInfoResults = container.querySelector('#itemInfoResults');
         const imagesHtml = itemInfo.Images.map(image => `<img src="${image}" alt="${itemInfo['Item Name']}" style="max-width: 100%; height: auto; display: block; margin-bottom: 10px;" />`).join('');

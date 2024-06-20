@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitRegisterItem = container.querySelector('#registerItem');
     const checkItemRegistration = container.querySelector('#checkItemRegistration');
 
+    // Function to register an item
     async function registerItem() {
         const itemName = container.querySelector('#itemNameRegister').value;
         console.log('Item Name:', itemName);
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Function to check if an item is registered
     async function checkRegistration() {
         const itemName = container.querySelector('#itemNameRegister').value;
 

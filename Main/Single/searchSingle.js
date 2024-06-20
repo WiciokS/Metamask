@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'performItemInDomainSearchButton', label: 'Item in Domain', handler: itemInDomainSearch }
     ];
 
+    // Load search options on page load
     loadSearchOptions();
 
+    // Function to load search options dynamically
     function loadSearchOptions() {
         const dynamicSection = container.querySelector('#dynamicSection');
         dynamicSection.innerHTML = `
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to clear search content
     function clearSearchContent() {
         const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = '';
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResults.innerHTML = '';
     }
 
+    // Function to search for items
     async function itemSearch() {
         const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
@@ -75,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to search for domains
     async function domainSearch() {
         const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
@@ -121,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to search for user reviews
     async function userSearch() {
         const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
@@ -150,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to search for items in a domain
     async function itemInDomainSearch() {
         const searchContent = container.querySelector('#searchContent');
         searchContent.innerHTML = `
@@ -182,11 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Function to clear search results
     function clearResults() {
         const searchResults = container.querySelector('#searchResults');
         searchResults.innerHTML = '';
     }
 
+    // Function to display item data
     function displayItemData(items) {
         const searchResults = container.querySelector('#searchResults');
         if (Array.isArray(items)) {
@@ -212,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Function to display domain data
     function displayDomainData(domains) {
         const searchResults = container.querySelector('#searchResults');
         if (Array.isArray(domains)) {
@@ -233,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Function to display reviews
     function displayReviews(reviews) {
         const searchResults = container.querySelector('#searchResults');
         const reviewsHtml = reviews.map(review => `

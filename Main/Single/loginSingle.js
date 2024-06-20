@@ -2,11 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('myAppContainer');
     const loginButton = container.querySelector('#metaMaskLoginButton');
 
-    // Separate event listener for the MetaMask login button
+    // Event listener for the MetaMask login button
     loginButton.addEventListener('click', async () => {
         loginWithMetaMask();
     });
 
+    // Function to login with MetaMask
     async function loginWithMetaMask() {
         if (!window.ethereum) {
             console.error('MetaMask is not installed!');
