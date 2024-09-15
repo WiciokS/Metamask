@@ -1,0 +1,313 @@
+#myAppContainer {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+#myAppContainer .container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+#myAppContainer .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+#myAppContainer .sidebar button {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #444;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+#myAppContainer .sidebar button:hover {
+    background-color: #555;
+}
+
+#myAppContainer .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#myAppContainer .section {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0,.1);
+    margin-bottom: 20px;
+}
+
+#myAppContainer .section.active {
+    display: block;
+}
+
+#myAppContainer .star-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#myAppContainer .star {
+    font-size: 40px;
+    cursor: pointer;
+    color: grey;
+    transition: color 0.3s ease;
+}
+
+#myAppContainer .star:hover,
+#myAppContainer .star.selected {
+    color: gold;
+}
+
+#myAppContainer #ratingValue {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+#myAppContainer input[type="text"],
+#myAppContainer textarea {
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#myAppContainer textarea {
+    height: 100px;
+}
+
+#myAppContainer button {
+    background-color: #ff7a59;
+    background-image: linear-gradient(45deg, #f06292, #f76b1c);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+#myAppContainer button:hover {
+    background-image: linear-gradient(45deg, #f76b1c, #f06292);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+#myAppContainer .reviews-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#myAppContainer .review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+#myAppContainer .review:last-child {
+    border-bottom: none;
+}
+
+#myAppContainer .search-options button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #ff6a00, #ee0979);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#myAppContainer .search-options button:hover {
+    background: linear-gradient(90deg, #ee0979, #ff6a00);
+}
+
+/* Specific Styles for the Display Box */
+#displayId, #balance {
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+#itemInfoResults img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+#myAppContainer .items-container,
+#myAppContainer .domains-container,
+#myAppContainer .reviews-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#myAppContainer .item,
+#myAppContainer .domain,
+#myAppContainer .review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+#myAppContainer .item:last-child,
+#myAppContainer .domain:last-child,
+#myAppContainer .review:last-child {
+    border-bottom: none;
+}
+
+/* Scoped CSS within #myAppContainer */
+#myAppContainer .myApp-review-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#myAppContainer .myApp-review-header {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#myAppContainer .myApp-review-body {
+    margin-top: 10px;
+}
+
+#myAppContainer .myApp-user-review {
+    border: 2px solid #f76b1c; /* Highlight user's review */
+}
+
+/* Review Card Styles */
+#myAppContainer .myApp-review-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* For positioning the corner highlight */
+    padding-top: 25px; /* Extra padding to avoid overlap with the orange corner */
+    transition: transform 0.3s ease; /* Add a subtle hover effect */
+}
+
+#myAppContainer .myApp-review-card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+#myAppContainer .myApp-user-review::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 40px solid #f76b1c; /* Orange corner */
+    border-right: 40px solid transparent; /* Make the corner triangle */
+    border-radius: 8px 0 0 0;
+}
+
+#myAppContainer .myApp-comment-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Increase the size of the stars for better visibility */
+#myAppContainer .star-rating .star {
+    font-size: 28px; /* Larger stars for rating selection */
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+/* Stars in the comments section (bigger, orange stars) */
+#myAppContainer .review-stars {
+    color: #f76b1c; /* Orange color for the stars */
+    font-size: 26px; /* Larger stars in displayed reviews */
+    margin: 8px 0; /* Equal margin above and below the stars */
+}
+
+/* Review Header Styles */
+#myAppContainer .myApp-review-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Review Body Styles */
+#myAppContainer .myApp-review-body {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+
+/* Loading Spinner Styles */
+#myAppContainer .loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #f76b1c; /* Orange top */
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto; /* Center the spinner */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+
+
