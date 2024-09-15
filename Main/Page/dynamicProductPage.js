@@ -27,11 +27,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const averageRating = calculateAverageRating(reviews);
 
         // Generate stars for the average rating
-        const averageRatingStars = generateStars(averageRating);
-
+        const averageRatingStars = generateSvgStars(averageRating);
         const productRatingElem = document.createElement('p');
         productRatingElem.id = 'productRating';
-        productRatingElem.innerHTML = `Rating: ${averageRating.toFixed(1)}/5 <span class="review-stars">${averageRatingStars}</span>`;
+        productRatingElem.innerHTML = `<div class="svg-star-container">${averageRatingStars}</div>`;
 
         productInfoDiv.appendChild(productNameElem);
         productInfoDiv.appendChild(productDescriptionElem);
@@ -205,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // Function to generate comments list
+    // Function to generate comments list with a scrollable container
     function generateCommentsList() {
         const commentsListDiv = document.createElement('div');
         commentsListDiv.id = 'commentsList';
@@ -215,13 +214,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const commentsContainer = document.createElement('div');
         commentsContainer.id = 'commentsContainer';
+        commentsContainer.classList.add('myApp-scrollable-comments'); // Add a class for scrolling
 
         commentsListDiv.appendChild(commentsHeader);
         commentsListDiv.appendChild(commentsContainer);
         container.appendChild(commentsListDiv);
     }
 
-    // Function to fetch and display reviews
+// Function to fetch and display reviews inside the scrollable container
     async function displayReviews(reviewsContract) {
         const commentsContainer = document.getElementById('commentsContainer');
         commentsContainer.innerHTML = ''; // Clear existing comments
@@ -261,21 +261,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Helper function to create a review card with stars for the rating
     function createReviewCard(review, isUserReview) {
         const reviewDiv = document.createElement('div');
-        reviewDiv.classList.add('myApp-review-card');
+        reviewDiv.classList.add('myApp-review-card'); // Generic class for review card
+
         if (isUserReview) {
             reviewDiv.classList.add('myApp-user-review'); // Special styling for the logged-in user's review
         }
 
         // Generate stars based on rating
-        const stars = generateStars(review.rating);
+        const stars = generateSvgStars(review.rating);
 
         reviewDiv.innerHTML = `
         <div class="myApp-review-header">
-            <strong></strong> ${isUserReview ? 'You' : review.reviewer}
+            <strong>${isUserReview ? 'You' : review.reviewer}</strong>
         </div>
         <div class="myApp-review-body">
-            <p class="review-stars">${stars}</p>
-            <p><strong></strong> ${review.comment}</p>
+            <p class="myApp-review-stars">${stars}</p>
+            <p class="myApp-review-comment">${review.comment}</p>
         </div>
     `;
 
@@ -283,24 +284,59 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-// Function to generate stars for a given rating (including half stars)
+
+// Function to generate stars for a given rating (without the number and with tighter spacing for partial stars)
     function generateStars(rating) {
         let stars = '';
         for (let i = 1; i <= 5; i++) {
             if (i <= Math.floor(rating)) {
-                stars += '&#9733;'; // Filled star
+                stars += `<span class="star full">&#9733;</span>`; // Full star
             } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
-                stars += '&#9733;&#10025;'; // Half star
+                // Calculate partial star width based on the decimal part of the rating
+                const filledWidth = (rating % 1) * 100;
+                stars += `
+                <span class="star partial" style="--filled-width: ${filledWidth}%;">
+                    &#9733;
+                </span>
+            `;
             } else {
-                stars += '&#9734;'; // Empty star
+                stars += `<span class="star">&#9734;</span>`; // Empty star
             }
         }
         return stars;
     }
 
+    // Function to generate SVG stars with partial star correctly filled with grey
+    function generateSvgStars(rating) {
+        let stars = '';
+        const fullStarSvg = `
+        <svg viewBox="0 0 24 24" width="100%" height="100%">
+            <polygon points="12 2 15 9 22 9 17 14 18 22 12 18 6 22 7 14 2 9 9 9"/>
+        </svg>`;
 
-
-
+        for (let i = 1; i <= 5; i++) {
+            if (i <= Math.floor(rating)) {
+                // Full star
+                stars += `<span class="svg-star full">${fullStarSvg}</span>`;
+            } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+                // Partial star with both filled and empty portions
+                const filledWidth = (rating % 1) * 100;
+                stars += `
+                <span class="svg-star partial">
+                    <svg viewBox="0 0 24 24" width="100%" height="100%">
+                        <!-- Empty part of the star -->
+                        <polygon points="12 2 15 9 22 9 17 14 18 22 12 18 6 22 7 14 2 9 9 9" fill="#ddd"/>
+                        <!-- Filled part of the star -->
+                        <polygon points="12 2 15 9 22 9 17 14 18 22 12 18 6 22 7 14 2 9 9 9" class="partial-fill" style="clip-path: inset(0 ${100 - filledWidth}% 0 0);" fill="#f76b1c"/>
+                    </svg>
+                </span>`;
+            } else {
+                // Empty star
+                stars += `<span class="svg-star empty">${fullStarSvg}</span>`;
+            }
+        }
+        return stars;
+    }
 
 
     // Function to print contract addresses

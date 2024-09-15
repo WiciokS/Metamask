@@ -5,6 +5,7 @@
     height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
+
 }
 
 #myAppContainer .container {
@@ -217,6 +218,7 @@
 
 #myAppContainer .myApp-review-body {
     margin-top: 10px;
+
 }
 
 #myAppContainer .myApp-user-review {
@@ -243,12 +245,12 @@
 #myAppContainer .myApp-user-review::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -0.9px;
+    left: -3.7px;
     width: 0;
     height: 0;
-    border-top: 40px solid #f76b1c; /* Orange corner */
-    border-right: 40px solid transparent; /* Make the corner triangle */
+    border-top: 30px solid #f76b1c; /* Orange corner */
+    border-right: 30px solid transparent; /* Make the corner triangle */
     border-radius: 8px 0 0 0;
 }
 
@@ -306,6 +308,146 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* General star container styling */
+#myAppContainer .star-container {
+    display: inline-block;
+    font-size: 26px;
+    position: relative;
+    margin-right: 5px;
+}
+
+/* General star container styling */
+#myAppContainer .star-container {
+    display: inline-block;
+    font-size: 26px;
+    position: relative;
+    margin-right: 0px; /* Remove margin to eliminate spaces between stars */
+    padding: 0; /* No padding */
+}
+
+/* Full and partial star styling */
+#myAppContainer .star {
+    color: #ddd; /* Default empty star color */
+    position: relative;
+    display: inline-block;
+    font-size: 26px; /* Same font size for all stars */
+    line-height: 1; /* Prevent extra vertical space */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin to ensure stars are close together */
+}
+
+#myAppContainer .star::before {
+    content: '★';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #f76b1c; /* Full star color */
+    width: 0;
+    overflow: hidden;
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
+}
+
+#myAppContainer .star.full::before {
+    width: 100%; /* Full star width */
+}
+
+#myAppContainer .star.partial::before {
+    width: 50%; /* This will be dynamically set in the JS based on the rating */
+}
+
+#myAppContainer .star.full {
+    color: #f76b1c; /* Full star color */
+}
+
+/* General star container styling */
+#myAppContainer .svg-star-container {
+    display: flex; /* Ensure stars are displayed inline */
+    gap: 2px; /* Small gap between stars */
+}
+
+#myAppContainer .svg-star {
+    display: inline-block;
+    font-size: 26px;
+    margin-right: 0px; /* Ensure no margins between stars */
+    padding: 0; /* Remove padding */
+}
+
+#myAppContainer .svg-star.full svg,
+#myAppContainer .svg-star.partial svg {
+    width: 26px;
+    height: 26px;
+}
+
+/* Partial star fill */
+#myAppContainer .svg-star.partial svg .partial-fill {
+    fill: #f76b1c; /* Color for the filled portion */
+    clip-path: inset(0 50% 0 0); /* This will be dynamically set based on rating */
+}
+
+/* Full star styling */
+#myAppContainer .svg-star.full svg {
+    fill: #f76b1c; /* Full star color */
+}
+
+/* Empty star styling */
+#myAppContainer .svg-star.empty svg {
+    fill: #ddd; /* Empty star color */
+    width: 26px;
+    height: 26px;
+}
+
+/* Scrollable container for comments */
+#myAppContainer .myApp-scrollable-comments {
+    max-height: 400px; /* Set the height limit */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Generic review card styling */
+#myAppContainer .myApp-review-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+/* Styling for logged-in user's review */
+#myAppContainer .myApp-user-review {
+    border-left: 4px solid #f76b1c; /* Highlight user's review */
+    background-color: #fef4e5;
+}
+
+/* Review header */
+#myAppContainer .myApp-review-header {
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-left: 20px;
+}
+
+/* Stars for the review */
+#myAppContainer .myApp-review-stars {
+    margin-bottom: 8px;
+    margin-left: 20px;
+}
+
+/* Review comment text */
+#myAppContainer .myApp-review-comment {
+    margin-left: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+
+
+
 
 
 
