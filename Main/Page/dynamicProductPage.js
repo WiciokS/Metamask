@@ -364,6 +364,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             displayReviews(metaMaskData.reviewsContract);
             generateMetaMaskSection();
         }
+        //reload the page when the user connects to metamask or failed to connect
+        window.ethereum.on('accountsChanged', function (accounts) {
+            window.location.reload();
+        });
+
+
     }
 
     // Initialize the page
