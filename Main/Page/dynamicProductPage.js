@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const scriptTag = document.querySelector('script[data-itemname]');
     const itemName = scriptTag.getAttribute('data-itemname');
 
-    // Function to generate the product info HTML (with dynamic average rating)
-    async function generateProductInfo(reviewsContract) {
+    // Function to generate the product info HTML (with dynamic average rating and description from contract)
+    async function generateProductInfo(reviewsContract, itemContainerContract) {
         const productInfoDiv = document.createElement('div');
         productInfoDiv.id = 'productInfo';
 
@@ -19,11 +19,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         const productDescriptionElem = document.createElement('p');
         productDescriptionElem.id = 'productDescription';
         productDescriptionElem.innerText = "This is a placeholder description for the product.";
+        const domainName = window.location.hostname;
+        try {
+            // Fetch the item from the ItemContainer contract
+            const item = await itemContainerContract.getItem(itemName);
+
+            // Find the description for the current domain
+            const domainDescription = item.domainDescriptions.find(d => d.domainName === domainName);
+
+            if (domainDescription && domainDescription.desc) {
+                // Update the description with the one from the contract
+                productDescriptionElem.innerText = domainDescription.desc;
+            }
+
+        } catch (error) {
+            console.error("Error fetching item description:", error);
+        }
 
         // Fetch the reviews and calculate the average rating
-        const domainName = window.location.hostname;
         const reviews = await fetchReviews(reviewsContract, itemName, domainName);
-
         const averageRating = calculateAverageRating(reviews);
 
         // Generate stars for the average rating
@@ -40,6 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const firstChild = container.firstChild;
         container.insertBefore(productInfoDiv, firstChild); // Add it before anything else
     }
+
 
 // Function to calculate the average rating from reviews
     function calculateAverageRating(reviews) {
@@ -144,7 +159,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const comment = commentBox.value;
             const rating = parseInt(ratingValue.innerText);
             const domainName = window.location.hostname; // Domain name of the website
-            const currentItemName = itemName; // Product name passed from HTML
+            console.log('domainName:', domainName);
+            const currentItemName = itemName; // Product name passed from HTML=
 
             if (!comment || rating === 0) {
                 alert('Please provide a comment and select a rating.');
@@ -359,7 +375,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function init() {
         const metaMaskData = await connectToMetaMask();
         if (metaMaskData) {
-            generateProductInfo(metaMaskData.reviewsContract); // Generate product info with rating
+            generateProductInfo(metaMaskData.reviewsContract, metaMaskData.itemContract); // Generate product info with rating
             generateCommentsList();
             displayReviews(metaMaskData.reviewsContract);
             generateMetaMaskSection();
