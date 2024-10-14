@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Registration and Fetch</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.6/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+<div id="myAppContainer">
+  <h1>Registered Domains</h1>
+
+  <button id="fetchDomainsButton">Fetch Registered Domains</button>
+  <div id="domainList"></div> <!-- List of domains will be displayed here -->
+</div>
+<!-- Include the contract interaction script -->
+<script src="display.js"></script>
+<script>
+
+  // Call MetaMask connect on page load
+  window.addEventListener('load', async () => {
+    await connectToMetaMask();
+  });
+
+  // Fetch and display registered domains on button click
+  document.getElementById('fetchDomainsButton').addEventListener('click', async () => {
+    await getAllRegisteredDomains();
+  });
+</script>
+
+
+</body>
+</html>
